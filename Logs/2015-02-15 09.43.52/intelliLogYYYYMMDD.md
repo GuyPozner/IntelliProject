@@ -45,4 +45,4 @@ This is the nosepokes count with the appropriate plot
 
 Nosepokes over time for each animal
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
-In the future this will hold ploting for time errors including learning curves and histograms for reaction times.
+  In the future this will hold ploting for time errors including learning curves and histograms for reaction times.
