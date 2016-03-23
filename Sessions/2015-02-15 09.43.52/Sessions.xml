@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSession xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Session Id="0">
+    <TimeZoneOffset>02:00:00</TimeZoneOffset>
+    <Interval>
+      <Start>2015-02-15T09:43:52.234375+02:00</Start>
+      <End>2015-02-18T19:16:03.546875+02:00</End>
+    </Interval>
+    <StartLocalTimeString>2015-02-15 09:43:52.23</StartLocalTimeString>
+    <EndLocalTimeString>2015-02-18 19:16:03.54</EndLocalTimeString>
+    <ExperimentFileName>VisTrainingFinalLVL.experiment</ExperimentFileName>
+    <VisitMode>Mode2</VisitMode>
+    <VisitDurationLimit>5</VisitDurationLimit>
+    <DiagnosticMode>true</DiagnosticMode>
+    <SoftwareVersion>2.6.9.30465</SoftwareVersion>
+    <Hardware>
+      <SerialPort>
+        <PortName>COM4</PortName>
+        <BaudRate>115200</BaudRate>
+        <ReadBufferSize>4096</ReadBufferSize>
+        <WriteBufferSize>4096</WriteBufferSize>
+      </SerialPort>
+      <CanDevice>
+        <Mode>IXXAT</Mode>
+        <SerialPortName>COM1</SerialPortName>
+        <VciObjectId>0</VciObjectId>
+        <DeviceClass>00000000-0000-0000-0000-000000000000</DeviceClass>
+      </CanDevice>
+    </Hardware>
+  </Session>
+</ArrayOfSession>

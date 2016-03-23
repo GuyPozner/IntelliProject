@@ -1,0 +1,99 @@
+IntelliLogYYYYMMDD
+===================
+
+This is an example of an R Markdown document I've made to encapsulate
+the analysis code and plots for the basic log files we will produce from the intellicage.
+after each session a same log will be produced and save in the log folder.
+
+```{r, echo = FALSE}
+#setting the file to work in the current dir
+this.dir <- dirname(parent.frame(2)$ofile)
+setwd(this.dir)
+```
+
+This R markdown requires ggplot2 package and will install it if it doesn't exist.  
+```{r, echo=FALSE}
+#check if ggplot exists and install it if not
+list.of.packages <- c("ggplot2")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+```
+
+It read the "animals.txt", "visits.txt" and "nosepokes.txt" files,    
+```{r, echo = FALSE}
+#Read the intellicage data, nosepokes, visits, and animals
+sessionPath <- "Sessions/2015-02-15 09.43.52/"
+visits <- read.csv(paste0(sessionPath,"IntelliCage/Visits.txt"), sep = "\t")
+nosepokes <- read.csv(paste0(sessionPath,"IntelliCage/Nosepokes.txt"), sep = "\t")
+animals <- read.csv(paste0(sessionPath,"/Animals.txt"), sep = "\t")
+```
+and assigns animal name for each event as a factor(visit and nosepoke).  
+
+```{r, echo = FALSE}
+#Replace AnimalTag with its AnimalName
+visits$AnimalName <- lapply(visits$AnimalTag,
+                                function(x){
+                                            animals$AnimalName[animals$AnimalTag == x ]})
+visits <- transform(visits, AnimalName = unlist(AnimalName))
+
+#Assigning an animal name to each visit id in the nosepokes data set
+nosepokes$AnimalName <- lapply(nosepokes$VisitID,
+                               function(x){
+                                       visits$AnimalName[visits$VisitID == x ]})
+nosepokes <- transform(nosepokes, AnimalName = unlist(AnimalName))
+
+```
+
+This is the visit count with the appropriate plot  
+```{r, echo = FALSE}
+#Plots visit count per animal
+visitsCountPlot <- ggplot(visits, aes(AnimalName)) +
+        geom_bar() +
+        xlab("") +
+        ggtitle("visits Count")
+print(table(visits$AnimalName))
+plot(visitsCountPlot)
+```
+
+Visits over time for each animal  
+```{r, fig.width=10, fig.height=4, echo = FALSE}
+#plot visits over time using the ggplot2 package
+visitPoints <- geom_point(aes(x = as.POSIXct(visits$Start),
+                              y = visits$AnimalName,
+                              colour = visits$AnimalName))
+visitPointsPlot <- ggplot() +
+                   visitPoints +
+                   xlab("") +
+                   ylab("") +
+                   ggtitle("Visits") +
+                   theme(legend.title=element_blank())
+plot(visitPointsPlot)
+```
+
+This is the nosepokes count with the appropriate plot 
+```{r, echo = FALSE}
+#Plots nosepoke count per animal
+nosepokesCountPlot <- ggplot(nosepokes, aes(AnimalName)) +
+                      geom_bar() +
+                      xlab("") +
+                      ggtitle("Nosepokes Count")
+print(table(nosepokes$AnimalName))
+plot(nosepokesCountPlot)
+```
+
+
+Nosepokes over time for each animal
+```{r, fig.width=10, fig.height=4, echo = FALSE}
+#Plot Nosepokes over time using the ggplot2 package
+nosepokePoints <- geom_point(aes(x = as.POSIXct(nosepokes$Start),
+                                 y = nosepokes$AnimalName,
+                                 colour = nosepokes$AnimalName))
+nosepokesPointsPlot <- ggplot() +
+        visitPoints +
+        xlab("") +
+        ylab("") +
+        ggtitle("Nosepokes") +
+        theme(legend.title=element_blank())
+plot(nosepokesPointsPlot)
+```
+In the future this will hold ploting for time errors including learning curves and histograms for reaction times.
