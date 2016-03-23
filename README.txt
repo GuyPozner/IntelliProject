@@ -15,6 +15,9 @@ This includes:
 4. Analysis code files. 
 5. Figures. 
 6. Each experiment file should contain a txt file by the same name explaining shortly what it does.
+7‫.‬Log files should be weaved for every session using the IntelliLogYYYYMMDD and should be kept in a directory with the same name as the session directory(
+Markdown(.MD), html and .Rmd files.
+
 
 
    
