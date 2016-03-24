@@ -37,7 +37,7 @@ plot(visitsCountPlot)
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
 
-Visits over time for each animal  
+Visits over time for each animal   
 
 ```r
 #plot visits over time using the ggplot2 package
@@ -55,6 +55,37 @@ plot(visitPointsPlot)
 ```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+
+Visit count across absoulute time
+
+```r
+#create a data frame for visit per hour
+hours <- vapply(split(1:nrow(visits),
+                      format(as.POSIXlt(visits$Start),"%Y-%m-%d%H:00:00",tz='UTC')),
+                      length,
+                      0)
+visitsPerHour <- as.numeric(hours)
+hour <- as.POSIXct(names(hours))
+visitCount <- data.frame(hour,visitsPerHour)
+#Plot a line plot for the visitCount data frame
+visitCountLine <- ggplot(a,aes(b,c)) +
+                  geom_line() +
+                  ylab("Count") +
+                  xlab("") +
+                  ggtitle("Visit count per hour")
+plot(visitCountLine)
+```
+
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+
+```r
+print(visitCount$hour[which.max(visitCount$visitsPerHour)])
+```
+
+```
+## [1] "2015-02-17 09:00:00 IST"
+```
+
 
 This is the nosepokes count with the appropriate plot 
 
@@ -77,7 +108,7 @@ print(table(nosepokes$AnimalName))
 plot(nosepokesCountPlot)
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
 
 
 Nosepokes over time for each animal
@@ -97,7 +128,7 @@ nosepokesPointsPlot <- ggplot() +
 plot(nosepokesPointsPlot)
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
 
 
   

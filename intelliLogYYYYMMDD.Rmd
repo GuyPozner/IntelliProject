@@ -49,7 +49,7 @@ print(table(visits$AnimalName))
 plot(visitsCountPlot)
 ```
 
-Visits over time for each animal  
+Visits over time for each animal   
 ```{r, fig.width=10, fig.height=4, echo = TRUE}
 #plot visits over time using the ggplot2 package
 visitPoints <- geom_point(aes(x = as.POSIXct(visits$Start),
@@ -64,6 +64,31 @@ visitPointsPlot <- ggplot() +
                    theme(legend.title=element_blank())
 plot(visitPointsPlot)
 ```
+
+Visit count across absoulute time  
+```{r, echo = TRUE}
+#create a data frame for visit per hour
+hours <- vapply(split(1:nrow(visits),
+                      format(as.POSIXlt(visits$Start),"%Y-%m-%d%H:00:00",tz='UTC')),
+                      length,
+                      0)
+visitsPerHour <- as.numeric(hours)
+hour <- as.POSIXct(names(hours))
+visitCount <- data.frame(hour,visitsPerHour)
+#Plot a line plot for the visitCount data frame
+visitCountLine <- ggplot(a,aes(b,c)) +
+                  geom_line() +
+                  ylab("Count") +
+                  xlab("") +
+                  ggtitle("Visit count per hour")
+plot(visitCountLine)
+```
+
+This is the hour with the maximun number of visits
+```{r, echo = TRUE}
+print(visitCount$hour[which.max(visitCount$visitsPerHour)])
+```
+
 
 This is the nosepokes count with the appropriate plot 
 ```{r, echo = TRUE}
