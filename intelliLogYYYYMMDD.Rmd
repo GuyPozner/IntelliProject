@@ -84,7 +84,7 @@ visitCountLine <- ggplot(a,aes(b,c)) +
 plot(visitCountLine)
 ```
 
-This is the hour with the maximun number of visits
+This is the hour with the maximun number of visits  
 ```{r, echo = TRUE}
 print(visitCount$hour[which.max(visitCount$visitsPerHour)])
 ```

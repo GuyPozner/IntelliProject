@@ -56,7 +56,7 @@ plot(visitPointsPlot)
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
 
-Visit count across absoulute time
+Visit count across absoulute time  
 
 ```r
 #create a data frame for visit per hour
@@ -77,6 +77,8 @@ plot(visitCountLine)
 ```
 
 ![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+
+This is the hour with the maximun number of visits  
 
 ```r
 print(visitCount$hour[which.max(visitCount$visitsPerHour)])
@@ -108,7 +110,7 @@ print(table(nosepokes$AnimalName))
 plot(nosepokesCountPlot)
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
 
 
 Nosepokes over time for each animal
@@ -128,7 +130,7 @@ nosepokesPointsPlot <- ggplot() +
 plot(nosepokesPointsPlot)
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png)
 
 
   
