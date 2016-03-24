@@ -6,6 +6,7 @@ setwd(this.dir)
 list.of.packages <- c("ggplot2")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
+library(ggplot2)
 
 #Read the intellicage data, nosepokes, visits, and animals
 sessionPath <- "Sessions/2015-02-15 09.43.52/"
@@ -22,7 +23,7 @@ visits <- transform(visits, AnimalName = unlist(AnimalName))
 #Assigning an animal name to each visit id in the nosepokes data set
 nosepokes$AnimalName <- lapply(nosepokes$VisitID,
                                function(x){
-                                       visits$AnimalName[visits$VisitID == x ]})
+                                           visits$AnimalName[visits$VisitID == x ]})
 nosepokes <- transform(nosepokes, AnimalName = unlist(AnimalName))
 
 #plot visits over time using the ggplot2 package
@@ -61,8 +62,7 @@ nosepokesCountPlot <- ggplot(nosepokes, aes(AnimalName)) +
 print(table(nosepokes$AnimalName))
 plot(nosepokesCountPlot)
 
-#Adding an AnticipationTime column to the visits data set
-visits$DelayTime <- lapply(visits$ModuleName)
+
 
 
 
