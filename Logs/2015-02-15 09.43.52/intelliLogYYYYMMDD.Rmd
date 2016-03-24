@@ -39,7 +39,7 @@ nosepokes <- transform(nosepokes, AnimalName = unlist(AnimalName))
 ```
 
 This is the visit count with the appropriate plot  
-```{r, echo = FALSE}
+```{r, echo = TRUE}
 #Plots visit count per animal
 visitsCountPlot <- ggplot(visits, aes(AnimalName)) +
                    geom_bar() +
@@ -50,7 +50,7 @@ plot(visitsCountPlot)
 ```
 
 Visits over time for each animal  
-```{r, fig.width=10, fig.height=4, echo = FALSE}
+```{r, fig.width=10, fig.height=4, echo = TRUE}
 #plot visits over time using the ggplot2 package
 visitPoints <- geom_point(aes(x = as.POSIXct(visits$Start),
                               y = visits$AnimalName,
@@ -66,7 +66,7 @@ plot(visitPointsPlot)
 ```
 
 This is the nosepokes count with the appropriate plot 
-```{r, echo = FALSE}
+```{r, echo = TRUE}
 #Plots nosepoke count per animal
 nosepokesCountPlot <- ggplot(nosepokes, aes(AnimalName)) +
                       geom_bar() +
@@ -78,7 +78,7 @@ plot(nosepokesCountPlot)
 
 
 Nosepokes over time for each animal
-```{r, fig.width=10, fig.height=4, echo = FALSE}
+```{r, fig.width=10, fig.height=4, echo = TRUE}
 #Plot Nosepokes over time using the ggplot2 package
 nosepokePoints <- geom_point(aes(x = as.POSIXct(nosepokes$Start),
                                  y = nosepokes$AnimalName,
