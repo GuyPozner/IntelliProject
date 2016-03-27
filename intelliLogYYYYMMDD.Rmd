@@ -76,7 +76,7 @@ visitsPerHour <- as.numeric(hours)
 hour <- as.POSIXct(names(hours))
 visitCount <- data.frame(hour,visitsPerHour)
 #Plot a line plot for the visitCount data frame
-visitCountLine <- ggplot(a,aes(b,c)) +
+visitCountLine <- ggplot(visitCount, aes(hour, visitsPerHour)) +
                   geom_line() +
                   ylab("Count") +
                   xlab("") +

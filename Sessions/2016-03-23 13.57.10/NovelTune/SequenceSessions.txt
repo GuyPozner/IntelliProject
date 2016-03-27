@@ -1,0 +1,1 @@
+SequenceSessionId	Tag	VisitId	Start	End	Address	Output	PackageName
