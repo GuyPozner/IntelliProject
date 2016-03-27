@@ -1,5 +1,5 @@
 This experiment file is to adapt the mice  to drink between 19:00 and 23:59.
-If a mouse visits the corner not in the specified period a 15Khz sound will be heard
-cueing him that the corner is not active.
+
 If a mouse visit in the specified period no sound will be heard and access will be granted to
- the water upon nosepoking the left door which is the only active door.
+granted to the water upon nosepoking the left door which is the only active door,
+A positive reinforcement sound in 10Khz will be heard upon a nosepoke.
