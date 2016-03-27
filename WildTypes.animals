@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AnimalSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Animals>
+    <Animal Name="Animal 10" Tag="98102253062">
+      <Sex>Male</Sex>
+      <GroupName>Default</GroupName>
+      <ClusterName>Default</ClusterName>
+      <Notes />
+    </Animal>
+    <Animal Name="Animal 4" Tag="98102254571">
+      <Sex>Male</Sex>
+      <GroupName>Default</GroupName>
+      <ClusterName>Default</ClusterName>
+      <Notes />
+    </Animal>
+    <Animal Name="Animal 7" Tag="98102108119">
+      <Sex>Unknown</Sex>
+      <GroupName>Default</GroupName>
+      <ClusterName>Default</ClusterName>
+      <Notes />
+    </Animal>
+  </Animals>
+  <Groups>
+    <Group>
+      <Name>Default</Name>
+      <ModuleName>Default</ModuleName>
+      <Notes>Default animals group</Notes>
+    </Group>
+  </Groups>
+</AnimalSet>
