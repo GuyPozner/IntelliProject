@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSession xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Session Id="0">
+    <TimeZoneOffset>03:00:00</TimeZoneOffset>
+    <Interval>
+      <Start>2016-03-27T11:32:56+03:00</Start>
+      <End>0001-01-01T00:00:00</End>
+    </Interval>
+    <StartLocalTimeString>2016-03-27 11:32:56.00</StartLocalTimeString>
+    <ExperimentFileName>HourNosepokeAdaptation.experiment</ExperimentFileName>
+    <VisitMode>Mode2</VisitMode>
+    <VisitDurationLimit>5</VisitDurationLimit>
+    <DiagnosticMode>true</DiagnosticMode>
+    <SoftwareVersion>2.6.9.30465</SoftwareVersion>
+    <Hardware>
+      <SerialPort>
+        <PortName>COM4</PortName>
+        <BaudRate>115200</BaudRate>
+        <ReadBufferSize>4096</ReadBufferSize>
+        <WriteBufferSize>4096</WriteBufferSize>
+      </SerialPort>
+      <CanDevice>
+        <Mode>IXXAT</Mode>
+        <SerialPortName>COM1</SerialPortName>
+        <VciObjectId>0</VciObjectId>
+        <DeviceClass>00000000-0000-0000-0000-000000000000</DeviceClass>
+      </CanDevice>
+    </Hardware>
+  </Session>
+</ArrayOfSession>

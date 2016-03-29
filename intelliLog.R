@@ -62,6 +62,22 @@ nosepokesCountPlot <- ggplot(nosepokes, aes(AnimalName)) +
 print(table(nosepokes$AnimalName))
 plot(nosepokesCountPlot)
 
+#Count visits per hour for each animal
+animalDat <- split(visits, visits$AnimalName)
+visitHourAnimal <- sapply(animalDat, 
+                          function(x){vapply(split(1:nrow(x),
+                                                   format(as.POSIXlt(x$Start),
+                                                          "%Y-%m-%d%H:00:00",tz='UTC')),
+                                            length,
+                                            0)},
+                          simplify = "array")
+visitHourAnimal <- unlist(visitHourAnimal)
+visitHourAnimalDF <- read.table(text = names(visitHourAnimal), sep = ".")
+visitHourAnimalDF$VisitCount <- as.numeric(visitHourAnimal)
+names(visitHourAnimalDF) <- c("Hour", "AnimalName", "VisitCount")
+visitHourAnimalDF$Hour <- as.POSIXct(visitHourAnimalDF$Hour)
+
+
 
 
 
