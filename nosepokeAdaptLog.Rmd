@@ -205,6 +205,7 @@ for(i in 1:nrow(animalWindowNosepokesCount)){
 }
 p2 <- ggplot(animalWindowNosepokesCount,
              aes(Day, Count, group = AnimalName, colour = AnimalName)) +       geom_line() +
+      geom_point() +
       ggtitle("Nosepokes in 19:00-23:59 ")
 print(p2)
 print(animalWindowNosepokesCount[,-c(3,4)])
