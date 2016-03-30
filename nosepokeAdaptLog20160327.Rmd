@@ -1,0 +1,211 @@
+nosepokeAdapLog20160327
+=======================
+
+This is a log for the first nosepoke adaptation with wild types, no injections, no light cue, the door can be opened when nosepoked in the time window of 19:00-23:59
+
+This R markdown requires ggplot2 package and will install it if it doesn't exist.  
+```{r, echo=FALSE}
+#check if ggplot exists and install it if not
+list.of.packages <- c("ggplot2")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+```
+
+It read the "animals.txt", "visits.txt" and "nosepokes.txt" files,    
+```{r, echo = FALSE}
+#Read the intellicage data, nosepokes, visits, and animals
+sessionPath <- "Sessions/2016-03-27 11.32.56/"
+visits <- read.csv(paste0(sessionPath,"IntelliCage/Visits.txt"), sep = "\t")
+nosepokes <- read.csv(paste0(sessionPath,"IntelliCage/Nosepokes.txt"), sep = "\t")
+animals <- read.csv(paste0(sessionPath,"/Animals.txt"), sep = "\t")
+```
+and assigns animal name for each event as a factor(visit and nosepoke).  
+
+```{r, echo = FALSE}
+#Replace AnimalTag with its AnimalName
+visits$AnimalName <- lapply(visits$AnimalTag,
+                                function(x){
+                                            animals$AnimalName[animals$AnimalTag == x ]})
+visits <- transform(visits, AnimalName = unlist(AnimalName))
+
+#Assigning an animal name to each visit id in the nosepokes data set
+nosepokes$AnimalName <- lapply(nosepokes$VisitID,
+                               function(x){
+                                       visits$AnimalName[visits$VisitID  
+                                                         == x ]})
+nosepokes <- transform(nosepokes, AnimalName = unlist(AnimalName))
+
+```
+
+This is the visit count with the appropriate plot  
+```{r, echo = FALSE}
+#Plots visit count per animal
+visitsCountPlot <- ggplot(visits, aes(AnimalName)) +
+                   geom_bar() +
+                   xlab("") +
+                   ggtitle("visits Count")
+print(table(visits$AnimalName))
+plot(visitsCountPlot)
+```
+
+Visits over time for each animal   
+```{r, fig.width=10, fig.height=4, echo = FALSE}
+#plot visits over time using the ggplot2 package
+visitPoints <- geom_point(aes(x = as.POSIXct(visits$Start),
+                              y = visits$AnimalName,
+                              colour = visits$AnimalName),
+                              alpha = 0.3)
+visitPointsPlot <- ggplot() +
+                   visitPoints +
+                   xlab("") +
+                   ylab("") +
+                   ggtitle("Visits") +
+                   theme(legend.title=element_blank())
+plot(visitPointsPlot)
+```
+
+Visit count across absoulute time  
+```{r, echo = FALSE}
+#Count visits per hour for each animal
+animalDat <- split(visits, visits$AnimalName)
+visitHourAnimal <- sapply(animalDat, 
+                          function(x){vapply(split(1:nrow(x),
+                                            format(as.POSIXlt(x$Start),
+                                                   "%Y-%m-%d%H:00:00",
+                                                    tz='UTC')),
+                                            length,
+                                            0)},
+                          simplify = "array")
+visitHourAnimal <- unlist(visitHourAnimal)
+visitHourAnimalDF <- read.table(text = names(visitHourAnimal), sep = ".")
+visitHourAnimalDF$VisitCount <- as.numeric(visitHourAnimal)
+names(visitHourAnimalDF) <- c("AnimalName", "Hour", "VisitCount")
+visitHourAnimalDF$Hour <- as.POSIXct(visitHourAnimalDF$Hour)
+```
+
+```{r, echo = FALSE, fig.width = 12, fig.height = 6}
+visitLines <- ggplot(visitHourAnimalDF,
+                     aes(Hour, VisitCount, colour = AnimalName))
+visitCountPlot <- visitLines + geom_line()
+print(visitCountPlot)
+```
+
+```{r, echo = FALSE}
+#create a data frame for visit per hour
+hours <- vapply(split(1:nrow(visits),
+                      format(as.POSIXlt(visits$Start),"%Y-%m-%d%H:00:00",tz='UTC')),
+                      length,
+                      0)
+visitsPerHour <- as.numeric(hours)
+hour <- as.POSIXct(names(hours))
+visitCount <- data.frame(hour,visitsPerHour)
+#Plot a line plot for the visitCount data frame
+visitCountLine <- ggplot(visitCount, aes(hour, visitsPerHour)) +
+                  geom_line() +
+                  ylab("Count") +
+                  xlab("") +
+                  ggtitle("Visit count per hour")
+```
+
+This is the hour with the maximun number of visits  
+```{r, echo = FALSE}
+print(visitCount$hour[which.max(visitCount$visitsPerHour)])
+```
+
+
+This is the nosepokes count with the appropriate plot 
+```{r, echo = FALSE}
+#Plots nosepoke count per animal
+nosepokesCountPlot <- ggplot(nosepokes, aes(AnimalName)) +
+                      geom_bar() +
+                      xlab("") +
+                      ggtitle("Nosepokes Count")
+print(table(nosepokes$AnimalName))
+plot(nosepokesCountPlot)
+```
+
+
+Nosepokes over time for each animal
+```{r, fig.width=10, fig.height=4, echo = FALSE}
+#Plot Nosepokes over time using the ggplot2 package
+nosepokePoints <- geom_point(aes(x = as.POSIXct(nosepokes$Start),
+                                 y = nosepokes$AnimalName,
+                                 colour = nosepokes$AnimalName),
+                                 alpha = 0.15)
+nosepokesPointsPlot <- ggplot() +
+                       nosepokePoints +
+                       xlab("") +
+                       ylab("") +
+                       ggtitle("Nosepokes") +
+                       theme(legend.title=element_blank())
+plot(nosepokesPointsPlot)
+```
+
+Check that drinking occoured only in the 19:00 23:59 time window, it shows the nosepokes where atleast one lick had happend, horizontal lines show the time window were the corner is active.
+```{r, echo = FALSE, fig.width=10, fig.height=4}
+#Plot licks over time using the ggplot2 package
+lickIdx <- (nosepokes$LickNumber > 0)
+lickPoints <- geom_point(aes(x =as.POSIXct(nosepokes$Start[lickIdx]),
+                                 y = nosepokes$AnimalName[lickIdx],
+                                 colour = nosepokes$AnimalName[lickIdx]),
+                                 alpha = 0.3)
+lickPointsPlot <- ggplot() +
+                       lickPoints +
+                       xlab("") +
+                       ylab("") +
+                       ggtitle("Nosepokes with at least one lick") +
+                       theme(legend.title=element_blank())
+plot(lickPointsPlot)
+
+```
+
+
+This is a plot showing the amount of nosepokes in the time window per day per animal  
+```{r, echo = FALSE}
+#find all the nosepokes which occoured in the time windows
+library(lubridate)
+hourNosepokes <- hour(ymd_hms(as.POSIXct(nosepokes$Start)))
+inds <- 1:max(which(hourNosepokes == 23)) #indices of nosepokes in days                                            #with window                 
+hourNosepokes <- hourNosepokes[inds]
+windowNosepokes <- nosepokes[inds,]
+dayNosepokes <- day(ymd_hms(as.POSIXct(
+                    windowNosepokes$Start)))
+windowNosepokes$Day <- dayNosepokes
+windowNosepokes$Hour <- hourNosepokes
+startHour <- 19
+endHour <- 23
+windowNosepokes <- windowNosepokes[windowNosepokes$Hour >= startHour &
+                                   windowNosepokes$Hour <= endHour,]
+p1 <- ggplot(windowNosepokes, aes(Day, fill=AnimalName)) +
+        geom_bar() +
+        ggtitle("Inside the time window nosepoke count")
+```
+
+This is the count of nosepokes per day per animal in the time windows
+```{r, echo = FALSE}
+#make a data frame with the count of nosepokes in the time window for each day for each animal
+name <- rep(animals$AnimalName,
+            length(unique(windowNosepokes$Day)))
+day <- rep(unique(windowNosepokes$Day),
+           length(animals$AnimalName))
+
+animalWindowNosepokesCount <- data.frame(name, day, startHour, endHour)
+names(animalWindowNosepokesCount) <- c("AnimalName", "Day", "startHour", "endHour")
+c <- as.numeric()
+for(i in 1:nrow(animalWindowNosepokesCount)){
+        animalWindowNosepokesCount$Count[i] <-
+                sum((windowNosepokes$AnimalName ==
+                   animalWindowNosepokesCount$AnimalName[i]) &
+                   (windowNosepokes$Day ==
+                   animalWindowNosepokesCount$Day[i]) &
+                   (windowNosepokes$Hour <=
+                   animalWindowNosepokesCount$endHour[i]) &
+                   (windowNosepokes$Hour >=
+                   animalWindowNosepokesCount$startHour[i]))
+}
+p2 <- ggplot(animalWindowNosepokesCount,
+             aes(Day, Count, group = AnimalName, colour = AnimalName)) +       geom_line() +
+      ggtitle("Nosepokes in 19:00-23:59 ")
+print(p2)
+print(animalWindowNosepokesCount[,-c(3,4)])
+```

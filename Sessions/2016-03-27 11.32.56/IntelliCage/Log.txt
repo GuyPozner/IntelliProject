@@ -1,0 +1,25 @@
+DateTime	LogCategory	LogType	Cage	Corner	Side	LogNotes
+2016-03-27 11:32:56.34	Info	Application				Session is started
+2016-03-27 20:11:53.23	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-27 20:29:12.00	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-27 20:41:30.39	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-27 21:29:43.31	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-28 06:15:00.51	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-28 09:56:03.71	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-28 09:58:54.25	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-28 10:25:00.39	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-28 19:53:14.73	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-28 19:53:22.09	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-28 19:54:52.40	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-28 19:55:53.51	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-28 20:02:41.90	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-28 20:37:52.42	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-28 21:00:24.79	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-28 21:26:38.89	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-28 21:26:50.81	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-28 22:21:40.06	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-28 23:05:43.85	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-29 00:14:59.81	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-29 06:49:41.29	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-29 07:15:56.40	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-29 10:35:11.67	Info	Application				Session is stopped

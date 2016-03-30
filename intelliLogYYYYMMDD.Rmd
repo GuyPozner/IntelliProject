@@ -16,7 +16,7 @@ if(length(new.packages)) install.packages(new.packages)
 It read the "animals.txt", "visits.txt" and "nosepokes.txt" files,    
 ```{r, echo = FALSE}
 #Read the intellicage data, nosepokes, visits, and animals
-sessionPath <- "Sessions/2015-02-15 09.43.52/"
+sessionPath <- "Sessions/2016-03-27 11.32.56/"
 visits <- read.csv(paste0(sessionPath,"IntelliCage/Visits.txt"), sep = "\t")
 nosepokes <- read.csv(paste0(sessionPath,"IntelliCage/Nosepokes.txt"), sep = "\t")
 animals <- read.csv(paste0(sessionPath,"/Animals.txt"), sep = "\t")
@@ -31,11 +31,10 @@ visits$AnimalName <- lapply(visits$AnimalTag,
 visits <- transform(visits, AnimalName = unlist(AnimalName))
 
 #Assigning an animal name to each visit id in the nosepokes data set
-nosepokes$AnimalName <- lapply(nosepokes$VisitID,
+nosepokes$AnimalName <- sapply(nosepokes$VisitID,
                                function(x){
                                        visits$AnimalName[visits$VisitID == x ]})
 nosepokes <- transform(nosepokes, AnimalName = unlist(AnimalName))
-
 ```
 
 This is the visit count with the appropriate plot  

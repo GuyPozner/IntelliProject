@@ -4,9 +4,10 @@
     <TimeZoneOffset>03:00:00</TimeZoneOffset>
     <Interval>
       <Start>2016-03-27T11:32:56+03:00</Start>
-      <End>0001-01-01T00:00:00</End>
+      <End>2016-03-29T10:35:11.671875+03:00</End>
     </Interval>
     <StartLocalTimeString>2016-03-27 11:32:56.00</StartLocalTimeString>
+    <EndLocalTimeString>2016-03-29 10:35:11.67</EndLocalTimeString>
     <ExperimentFileName>HourNosepokeAdaptation.experiment</ExperimentFileName>
     <VisitMode>Mode2</VisitMode>
     <VisitDurationLimit>5</VisitDurationLimit>
