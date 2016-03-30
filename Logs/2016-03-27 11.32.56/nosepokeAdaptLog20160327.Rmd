@@ -160,7 +160,6 @@ plot(lickPointsPlot)
 ```
 
 
-This is a plot showing the amount of nosepokes in the time window per day per animal  
 ```{r, echo = FALSE}
 #find all the nosepokes which occoured in the time windows
 library(lubridate)

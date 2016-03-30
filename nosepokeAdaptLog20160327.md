@@ -57,7 +57,6 @@ Check that drinking occoured only in the 19:00 23:59 time window, it shows the n
 ![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png)
 
 
-This is a plot showing the amount of nosepokes in the time window per day per animal  
 
 
 This is the count of nosepokes per day per animal in the time windows
