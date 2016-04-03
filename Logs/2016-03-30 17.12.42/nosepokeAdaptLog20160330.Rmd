@@ -11,7 +11,7 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 ```
 
-It read the "animals.txt", "visits.txt" and "nosepokes.txt" files, from both the 30 and 31, cause there has been a malfunction in the morning of the 31.    
+It read the "animals.txt", "visits.txt" and "nosepokes.txt" files, from both the 30 and 31 and attaches them, cause there has been a malfunction in the morning of the 31 which caused a split into two session folders.    
 ```{r, echo = FALSE}
 #Read the intellicage data, nosepokes, visits, and animals
 #Attach the 2016-03-31 15.57.42 session.
