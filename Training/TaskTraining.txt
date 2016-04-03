@@ -1,9 +1,0 @@
-Visual cue times: Easy = 100ms Medium = 200ms Hard = 500ms
-
-This is the training for the task:
-Between 19:00 and 23:59 the corner will be active,
-randomly choosing from modules 1-3, each module corresponds to a diffrent
-anticipation time 2-4s. Upon a visit a timer will count down to activate the visual cue(LED),
-If a nosepoke will occour in the anticipation time a 15Khz sound will appear and the task wil terminate.
-Otherwise a led will appear cuing the mouse to nosepoke the door, if it nosepoked in the cue time+500ms window
- a 10KHz sound will be heard and the door will open enabling access to the water bottle.
