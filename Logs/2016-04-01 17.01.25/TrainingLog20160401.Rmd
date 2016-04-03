@@ -1,7 +1,7 @@
-nosepokeAdapLog20160330
+TrainingLog20160401
 =======================
 
-This is a log for the first nosepoke adaptation with wild types, no injections * with * light cue, the door can be opened when nosepoked in the time window of 19:00-23:59
+This is a log for the first training session with wild types, no injections, the door can be opened when nosepoked in the time window of 19:00-23:59, but only after a light cue appears between 2-4s after a visit occours.
 
 This R markdown requires ggplot2 package and will install it if it doesn't exist.  
 ```{r, echo=FALSE}
@@ -11,21 +11,15 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 ```
 
-It read the "animals.txt", "visits.txt" and "nosepokes.txt" files, from both the 30 and 31 and attaches them, cause there has been a malfunction in the morning of the 31 which caused a split into two session folders.    
+It read the "animals.txt", "visits.txt" and "nosepokes.txt" files,    
 ```{r, echo = FALSE}
 #Read the intellicage data, nosepokes, visits, and animals
-#Attach the 2016-03-31 15.57.42 session.
-sessionPath <- "Sessions/2016-03-30 17.12.42/"
-sessionPath2 <- "Sessions/2016-03-31 15.57.42/"
+sessionPath <- "Sessions/2016-04-01 17.01.25/"
 visits <- read.csv(paste0(sessionPath,"IntelliCage/Visits.txt"), sep = "\t")
 nosepokes <- read.csv(paste0(sessionPath,"IntelliCage/Nosepokes.txt"), sep = "\t")
-visits2 <- read.csv(paste0(sessionPath2,"IntelliCage/Visits.txt"), sep = "\t")
-visits2$VisitID <- length(visits$VisitID) + visits2$VisitID
-nosepokes2 <- read.csv(paste0(sessionPath2,"IntelliCage/Nosepokes.txt"), sep = "\t")
-nosepokes2$VisitID <- length(visits$VisitID) + nosepokes2$VisitID
+#remove the nosepokes from the right side
+nosepokes <- nosepokes[!nosepokes$SideError,]
 animals <- read.csv(paste0(sessionPath,"/Animals.txt"), sep = "\t")
-visits <- rbind(visits, visits2)
-nosepokes <- rbind(nosepokes, nosepokes2)
 ```
 and assigns animal name for each event as a factor(visit and nosepoke).  
 
@@ -210,11 +204,35 @@ for(i in 1:nrow(animalWindowNosepokesCount)){
                    animalWindowNosepokesCount$endHour[i]) &
                    (windowNosepokes$Hour >=
                    animalWindowNosepokesCount$startHour[i]))
+        animalWindowNosepokesCount$TimeError[i] <-
+                sum((windowNosepokes$AnimalName ==
+                   animalWindowNosepokesCount$AnimalName[i]) &
+                   (windowNosepokes$Day ==
+                   animalWindowNosepokesCount$Day[i]) &
+                   (windowNosepokes$Hour <=
+                   animalWindowNosepokesCount$endHour[i]) &
+                   (windowNosepokes$Hour >=
+                   animalWindowNosepokesCount$startHour[i]) &
+                   (windowNosepokes$TimeError == 1))
 }
 p2 <- ggplot(animalWindowNosepokesCount,
              aes(Day, Count, group = AnimalName, colour = AnimalName)) +       geom_line() +
       geom_point() +
       ggtitle("Nosepokes in 19:00-23:59 ")
 print(p2)
+```
+
+This is a plot showing the fraction of errors per time window.
+```{r, echo = FALSE}
+p3 <- ggplot(animalWindowNosepokesCount,
+             aes(Day,
+                 TimeError/Count,
+                 group = AnimalName,
+                 colour = AnimalName)) +
+        geom_line() +
+        geom_point() +
+      ggtitle("Error fraction per day")
+print(p3)
 print(animalWindowNosepokesCount[,-c(3,4)])
 ```
+The data shows that there are times when they succeed in the task, but do not lick, or that the lickometer doesn't record the licking. We are trying to make the task easier so they could learn and drink.  
