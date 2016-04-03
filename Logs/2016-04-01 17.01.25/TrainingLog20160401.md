@@ -6,7 +6,7 @@ This is a log for the first training session with wild types, no injections, the
 This R markdown requires ggplot2 package and will install it if it doesn't exist.  
 
 
-It read the "animals.txt", "visits.txt" and "nosepokes.txt" files,    
+It read the "animals.txt", "visits.txt" and "nosepokes.txt" files, removes all non-first nosepokes    
 
 and assigns animal name for each event as a factor(visit and nosepoke).  
 
@@ -44,7 +44,7 @@ This is the nosepokes count with the appropriate plot
 ```
 ## 
 ## Animal 10  Animal 4  Animal 7 
-##      1372      1297       270
+##       310       321        67
 ```
 
 ![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
@@ -68,11 +68,11 @@ This is a plot showing the fraction of errors per time window.
 
 ```
 ##   AnimalName Day Count TimeError
-## 1  Animal 10   1   343       240
-## 2   Animal 4   2   351       270
-## 3   Animal 7   1   163        88
-## 4  Animal 10   2   446       287
-## 5   Animal 4   1   368       252
-## 6   Animal 7   2    25        23
+## 1  Animal 10   1    94        72
+## 2   Animal 4   2    94        77
+## 3   Animal 7   1    31        19
+## 4  Animal 10   2    97        72
+## 5   Animal 4   1   110        86
+## 6   Animal 7   2    11        10
 ```
 The data shows that there are times when they succeed in the task, but do not lick, or that the lickometer doesn't record the licking. We are trying to make the task easier so they could learn and drink.  

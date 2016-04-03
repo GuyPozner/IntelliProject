@@ -11,7 +11,7 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 ```
 
-It read the "animals.txt", "visits.txt" and "nosepokes.txt" files,    
+It read the "animals.txt", "visits.txt" and "nosepokes.txt" files, removes all non-first nosepokes    
 ```{r, echo = FALSE}
 #Read the intellicage data, nosepokes, visits, and animals
 sessionPath <- "Sessions/2016-04-01 17.01.25/"
@@ -19,6 +19,9 @@ visits <- read.csv(paste0(sessionPath,"IntelliCage/Visits.txt"), sep = "\t")
 nosepokes <- read.csv(paste0(sessionPath,"IntelliCage/Nosepokes.txt"), sep = "\t")
 #remove the nosepokes from the right side
 nosepokes <- nosepokes[!nosepokes$SideError,]
+#Keep only the first nosepoke in each visit
+nosepokes <- nosepokes[!duplicated(nosepokes$VisitID),]
+
 animals <- read.csv(paste0(sessionPath,"/Animals.txt"), sep = "\t")
 ```
 and assigns animal name for each event as a factor(visit and nosepoke).  
@@ -193,7 +196,16 @@ day <- rep(unique(windowNosepokes$Day),
 
 animalWindowNosepokesCount <- data.frame(name, day, startHour, endHour)
 names(animalWindowNosepokesCount) <- c("AnimalName", "Day", "startHour", "endHour")
-c <- as.numeric()
+
+#Set Start and End colums in data as postixct
+windowNosepokes$Start <- as.POSIXct(windowNosepokes$Start) 
+windowNosepokes$End <- as.POSIXct(windowNosepokes$End)
+visits$Start <- as.POSIXct(visits$Start)
+
+#Check if a after time error has occoured and update windowNosepokes
+windowNosepokes$TimeError[
+        afterTimeErrorInds(visits, windowNosepokes)] <- 1 
+
 for(i in 1:nrow(animalWindowNosepokesCount)){
         animalWindowNosepokesCount$Count[i] <-
                 sum((windowNosepokes$AnimalName ==
