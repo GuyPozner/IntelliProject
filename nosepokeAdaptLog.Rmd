@@ -14,7 +14,7 @@ if(length(new.packages)) install.packages(new.packages)
 It read the "animals.txt", "visits.txt" and "nosepokes.txt" files,    
 ```{r, echo = FALSE}
 #Read the intellicage data, nosepokes, visits, and animals
-sessionPath <- "Sessions/2016-03-27 11.32.56/"
+sessionPath <- "Sessions/2016-03-30 17.12.42/"
 visits <- read.csv(paste0(sessionPath,"IntelliCage/Visits.txt"), sep = "\t")
 nosepokes <- read.csv(paste0(sessionPath,"IntelliCage/Nosepokes.txt"), sep = "\t")
 animals <- read.csv(paste0(sessionPath,"/Animals.txt"), sep = "\t")

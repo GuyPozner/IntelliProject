@@ -1,0 +1,11 @@
+DateTime	LogCategory	LogType	Cage	Corner	Side	LogNotes
+2016-03-31 15:57:45.89	Info	Application				Session is started
+2016-03-31 19:44:34.28	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-31 19:52:54.21	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-31 19:58:20.23	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-31 20:11:31.53	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-31 21:58:05.71	Warning	Lickometer	1	3	5	Lickometer is active but nosepoke is inactive
+2016-03-31 23:24:15.00	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-03-31 23:26:44.62	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-04-01 07:15:56.00	Warning	Presence	1	3		Presence signal without antenna registration.
+2016-04-01 17:01:04.04	Info	Application				Session is stopped
