@@ -14,9 +14,16 @@ if(length(new.packages)) install.packages(new.packages)
 It read the "animals.txt", "visits.txt" and "nosepokes.txt" files, removes all non-first nosepokes    
 ```{r, echo = FALSE}
 #Read the intellicage data, nosepokes, visits, and animals
-sessionPath <- "Sessions/2016-04-01 17.01.25/"
+sessionPath <- "Sessions/2016-04-03 17.16.27/"
+sessionPath2 <- "Sessions/2016-04-04 11.11.49/"
 visits <- read.csv(paste0(sessionPath,"IntelliCage/Visits.txt"), sep = "\t")
+visits2 <- read.csv(paste0(sessionPath2,"IntelliCage/Visits.txt"), sep = "\t")
+visits2$VisitID <- length(visits$VisitID) + visits2$VisitID
 nosepokes <- read.csv(paste0(sessionPath,"IntelliCage/Nosepokes.txt"), sep = "\t")
+nosepokes2 <- read.csv(paste0(sessionPath2,"IntelliCage/Nosepokes.txt"), sep = "\t")
+nosepokes2$VisitID <- length(visits$VisitID) + nosepokes2$VisitID
+visits <- rbind(visits, visits2)
+nosepokes <- rbind(nosepokes, nosepokes2)
 #remove the nosepokes from the right side
 nosepokes <- nosepokes[!nosepokes$SideError,]
 #Keep only the first nosepoke in each visit
@@ -203,8 +210,9 @@ windowNosepokes$End <- as.POSIXct(windowNosepokes$End)
 visits$Start <- as.POSIXct(visits$Start)
 
 #Check if a after time error has occoured and update windowNosepokes
+source("findTimeErrors.R")
 windowNosepokes$TimeError[
-        afterTimeErrorInds(visits, windowNosepokes)] <- 1 
+        findTimeErrors(visits, windowNosepokes)] <- 1 
 
 for(i in 1:nrow(animalWindowNosepokesCount)){
         animalWindowNosepokesCount$Count[i] <-
@@ -227,11 +235,6 @@ for(i in 1:nrow(animalWindowNosepokesCount)){
                    animalWindowNosepokesCount$startHour[i]) &
                    (windowNosepokes$TimeError == 1))
 }
-p2 <- ggplot(animalWindowNosepokesCount,
-             aes(Day, Count, group = AnimalName, colour = AnimalName)) +       geom_line() +
-      geom_point() +
-      ggtitle("Nosepokes in 19:00-23:59 ")
-print(p2)
 ```
 
 This is a plot showing the fraction of errors per time window.
@@ -247,4 +250,4 @@ p3 <- ggplot(animalWindowNosepokesCount,
 print(p3)
 print(animalWindowNosepokesCount[,-c(3,4)])
 ```
-The data shows that there are times when they succeed in the task, but do not lick, or that the lickometer doesn't record the licking. We are trying to make the task easier so they could learn and drink.  
+
