@@ -3,7 +3,7 @@ DelayCueAdaptLog20160403
 
 This is a log for the first training session with wild types, no injections, the door can be opened when nosepoked in the time window of 19:00-23:59, but only after a light cue appears(for 2s) 0.5s after a visit occours.
 
-This script attaches the sessions from the 03/04 and 04/04 because they have almost been the same, except that on the 3rd the door didn't close automatically after 3s, only when the visit ended.
+This script attaches the sessions from the 03/04 to 05/04 because they have almost been the same, except that on the 3rd the door didn't close automatically after 3s, only when the visit ended.
 
 This R markdown requires ggplot2 package and will install it if it doesn't exist.  
 ```{r, echo=FALSE}
@@ -11,6 +11,8 @@ This R markdown requires ggplot2 package and will install it if it doesn't exist
 list.of.packages <- c("ggplot2")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
+library(ggplot2)
+library(dplyr)
 ```
 
 It read the "animals.txt", "visits.txt" and "nosepokes.txt" files, removes all non-first nosepokes    
@@ -18,15 +20,22 @@ It read the "animals.txt", "visits.txt" and "nosepokes.txt" files, removes all n
 #Read the intellicage data, nosepokes, visits, and animals
 sessionPath <- "Sessions/2016-04-03 17.16.27/"
 sessionPath2 <- "Sessions/2016-04-04 11.11.49/"
+sessionPath3 <- "Sessions/2016-04-05 10.44.04/"
 visits1 <- read.csv(paste0(sessionPath,"IntelliCage/Visits.txt"), sep = "\t")
 visits2 <- read.csv(paste0(sessionPath2,"IntelliCage/Visits.txt"), sep = "\t")
+visits3 <- read.csv(paste0(sessionPath3,"IntelliCage/Visits.txt"), sep = "\t")
 source("bindVisits.R")
-visits <- bindVisits(visits1, visits2)
+visits2b <- bindVisits(visits1, visits2)
+visits <- bindVisits(visits2b, visits3)
 
 nosepokes1 <- read.csv(paste0(sessionPath,"IntelliCage/Nosepokes.txt"), sep = "\t")
 nosepokes2 <- read.csv(paste0(sessionPath2,"IntelliCage/Nosepokes.txt"), sep = "\t")
+nosepokes3 <- read.csv(paste0(sessionPath3,"IntelliCage/Nosepokes.txt"), sep = "\t")
+#Erase the cage TimeError count, its malfunctioning in some way.
+nosepokes3$TimeError <- 0
 source("bindNosepokes.R")
-nosepokes <- bindNosepokes(visits1, nosepokes1, nosepokes2)
+nosepokes2b <- bindNosepokes(visits1, nosepokes1, nosepokes2)
+nosepokes <- bindNosepokes(visits2b, nosepokes2b, nosepokes3)
 
 #remove the nosepokes from the right side
 nosepokes <- nosepokes[!nosepokes$SideError,]
@@ -259,4 +268,5 @@ p3 <- ggplot(animalWindowNosepokesCount,
 print(p3)
 print(animalWindowNosepokesCount[,-c(3,4)])
 ```
-
+## Conclusion
+It seems that the animals have learnd to associate the light cue with the possibilty to open the door.

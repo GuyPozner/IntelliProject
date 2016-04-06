@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSession xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Session Id="0">
+    <TimeZoneOffset>03:00:00</TimeZoneOffset>
+    <Interval>
+      <Start>2016-04-05T10:44:04.9375+03:00</Start>
+      <End>2016-04-06T11:24:00.390625+03:00</End>
+    </Interval>
+    <StartLocalTimeString>2016-04-05 10:44:04.93</StartLocalTimeString>
+    <EndLocalTimeString>2016-04-06 11:24:00.39</EndLocalTimeString>
+    <ExperimentFileName>DelayCueAdapt.experiment</ExperimentFileName>
+    <VisitMode>Mode2</VisitMode>
+    <VisitDurationLimit>5</VisitDurationLimit>
+    <DiagnosticMode>true</DiagnosticMode>
+    <SoftwareVersion>2.6.9.30465</SoftwareVersion>
+    <Hardware>
+      <SerialPort>
+        <PortName>COM4</PortName>
+        <BaudRate>115200</BaudRate>
+        <ReadBufferSize>4096</ReadBufferSize>
+        <WriteBufferSize>4096</WriteBufferSize>
+      </SerialPort>
+      <CanDevice>
+        <Mode>IXXAT</Mode>
+        <SerialPortName>COM1</SerialPortName>
+        <VciObjectId>0</VciObjectId>
+        <DeviceClass>00000000-0000-0000-0000-000000000000</DeviceClass>
+      </CanDevice>
+    </Hardware>
+  </Session>
+</ArrayOfSession>

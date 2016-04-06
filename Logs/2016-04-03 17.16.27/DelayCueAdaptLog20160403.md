@@ -3,7 +3,7 @@ DelayCueAdaptLog20160403
 
 This is a log for the first training session with wild types, no injections, the door can be opened when nosepoked in the time window of 19:00-23:59, but only after a light cue appears(for 2s) 0.5s after a visit occours.
 
-This script attaches the sessions from the 03/04 and 04/04 because they have almost been the same, except that on the 3rd the door didn't close automatically after 3s, only when the visit ended.
+This script attaches the sessions from the 03/04 to 05/04 because they have almost been the same, except that on the 3rd the door didn't close automatically after 3s, only when the visit ended.
 
 This R markdown requires ggplot2 package and will install it if it doesn't exist.  
 
@@ -19,7 +19,7 @@ This is the visit count with the appropriate plot
 ```
 ## 
 ## Animal 10  Animal 4 
-##       217       289
+##       402       523
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
@@ -46,7 +46,7 @@ This is the nosepokes count with the appropriate plot
 ```
 ## 
 ## Animal 10  Animal 4 
-##       174       221
+##       297       408
 ```
 
 ![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
@@ -74,5 +74,8 @@ This is a plot showing the fraction of errors per time window.
 ## 2   Animal 4   3    32        11
 ## 3  Animal 10   4    63         7
 ## 4   Animal 4   4    61        14
+## 5  Animal 10   5    57         4
+## 6   Animal 4   5    78        13
 ```
-
+## Conclusion
+It seems that the animals have learnd to associate the light cue with the possibilty to open the door.
