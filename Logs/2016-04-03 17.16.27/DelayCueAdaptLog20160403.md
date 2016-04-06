@@ -73,9 +73,19 @@ This is a plot showing the fraction of errors per time window.
 ## 1  Animal 10   3    26         5
 ## 2   Animal 4   3    32        11
 ## 3  Animal 10   4    63         7
-## 4   Animal 4   4    61        14
+## 4   Animal 4   4    61        13
 ## 5  Animal 10   5    57         4
-## 6   Animal 4   5    78        13
+## 6   Animal 4   5    78        12
 ```
+
+This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by day:  
+![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-1.png)
+
+```
+## [1] "The median reaction time in seconds:0.75"
+```
+This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by animal:
+![plot of chunk unnamed-chunk-17](figure/unnamed-chunk-17-1.png)
+
 ## Conclusion
 It seems that the animals have learnd to associate the light cue with the possibilty to open the door.
