@@ -1,0 +1,1 @@
+DateTime	Address	Channel	Speed	Counter	Direction	AnimalTag
