@@ -262,24 +262,29 @@ print(p3)
 print(results)
 ```
 
-This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by hour:  
-```{r, echo = FALSE, fig.width=10, fig.height=4}
-p4 <- ggplot(windowNosepokes, aes(ReactTime, fill = ModuleName)) +
+This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by Day by anticipation time, the salmon colored line is the overall median reaction time:
+```{r, echo = FALSE, fig.width=10, fig.height=9}
+p4 <- ggplot(windowNosepokes, aes(ReactTime)) +
         geom_histogram(binwidth = 0.1) +
         scale_x_continuous(breaks = seq(0,25,1)) +
         ggtitle("Reaction times histogram") +
-        geom_vline(xintercept =  median(windowNosepokes$ReactTime))
+        geom_vline(xintercept =  median(windowNosepokes$ReactTime),
+                   colour = "salmon", linetype = 5) +
+        facet_grid(Day ~ ModuleName)
+        
 print(p4)
 print(paste0("The median reaction time in seconds:"
              ,median(windowNosepokes$ReactTime)))
 ```
-This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by animal:
-```{r, echo = FALSE, fig.width=10, fig.height=4}
-p5 <- ggplot(windowNosepokes, aes(ReactTime, fill = AnimalName)) +
+This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by animal by anticipation time, the salmon colored line is the overall median reaction time:
+```{r, echo = FALSE, fig.width=10, fig.height=6}
+p5 <- ggplot(windowNosepokes, aes(ReactTime)) +
         geom_histogram(binwidth = 0.1) +
         scale_x_continuous(breaks = seq(0,25,1)) +
         ggtitle("Reaction times histogram") +
-        geom_vline(xintercept =  median(windowNosepokes$ReactTime))
+        geom_vline(xintercept =  median(windowNosepokes$ReactTime),
+                   colour = "salmon", linetype = 5) +
+        facet_grid(AnimalName ~ ModuleName)
 print(p5)
 ```
 

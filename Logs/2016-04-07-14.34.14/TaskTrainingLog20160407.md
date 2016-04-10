@@ -91,13 +91,13 @@ the number of the module corresponds the anticipation time in seconds.
 ## 18   Animal 4   9   Module 2    35        11
 ```
 
-This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by hour:  
+This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by Day by anticipation time, the salmon colored line is the overall median reaction time:
 ![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-1.png)
 
 ```
 ## [1] "The median reaction time in seconds:0.654999971389771"
 ```
-This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by animal:
+This is an histogram showing the reaction times(values under zero are nosepokes before the light cue) by animal by anticipation time, the salmon colored line is the overall median reaction time:
 ![plot of chunk unnamed-chunk-17](figure/unnamed-chunk-17-1.png)
 
 ## Conclusion
