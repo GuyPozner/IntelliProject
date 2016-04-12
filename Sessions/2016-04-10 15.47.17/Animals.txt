@@ -1,0 +1,3 @@
+AnimalName	AnimalTag	Sex	GroupName	AnimalNotes
+Animal 10	98102253062	Male	Default	
+Animal 4	98102254571	Male	Default	
